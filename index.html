@@ -3,12 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/content.css" rel="stylesheet">
     <title>JavaScript Projekt 1</title>
 </head>
 <body>
-    <div>
-        
+    <div id="header">
+        <img id="logo" src="https://d3fldh011ywsk8.cloudfront.net/wp-content/uploads/2017/12/Scholarship.jpg" />
+        <h1 id="header_title"></h1>
+    </div>
+
+    <div id="content">
+        <div id="income">
+            <div id="income_head">
+                <h2 id="income_head_title">PRZYCHODY</h2>
+                <div id="income_head_new">
+                    <input 
+                        type="text" 
+                        id="income_new_name"
+                    />
+                    <input 
+                        type="text" 
+                        id="income_new_amount"
+                    />
+                    <button
+                        id="income_new_add"
+                    >
+                        Dodaj
+                    </button>
+                </div>
+            </div>
+            <div id="income_body">
+
+            </div>
+            <div id="income_footer">
+                <span id="income_footer_title">Suma przychodów</span>
+                <strong>
+                    <span id="income_footer_amount"></span>
+                </strong>
+            </div>
+        </div>
+
+        <div id="expense">
+            <div id="expense_head">
+                <h2 id="expense_head_title">WYDATKI</h2>
+                <div id="expense_head_new">
+                    <input 
+                        type="text" 
+                        id="expense_new_name"
+                    />
+                    <input 
+                        type="text" 
+                        id="expense_new_amount"
+                    />
+                    <button
+                        id="expense_new_add"
+                    >
+                        Dodaj
+                    </button>
+                </div>
+            </div>
+            <div id="expense_body">
+
+            </div>
+            <div id="expense_footer">
+                <span id="expense_footer_title">Suma wydatków</span>
+                <strong>
+                    <span id="expense_footer_amount"></span>
+                </strong>
+            </div>
+        </div>
     </div>
 </body>
 </html>
