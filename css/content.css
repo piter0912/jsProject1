@@ -1,3 +1,16 @@
+input[type="number"] {
+  width: 80px;
+}
+
+input {
+  margin: 0 3px;
+  height: 30px;
+}
+
+button {
+  padding: 0 15px;
+}
+
 #content {
   display: flex;
   justify-content: center;
@@ -11,4 +24,64 @@
   display: flex;
   flex-direction: column;
   min-height: 800px;
+  width: 40vw;
+}
+
+#income,
+#expense {
+  border: 3px solid black;
+}
+
+#income_head,
+#expense_head {
+  border-bottom: 3px solid black;
+  padding: 25px;
+}
+
+#expense_body,
+#income_body {
+  min-height: 50vh;
+  flex-grow: 1;
+}
+
+#income_footer,
+#expense_footer {
+  padding: 10px;
+}
+
+#income_head_new,
+#expense_head_new {
+  display: flex;
+}
+
+#income_new_name,
+#expense_new_name {
+  flex-grow: 1;
+}
+
+#income_footer_title,
+#expense_footer_title {
+  font-size: large;
+}
+
+.listElement {
+  display: flex;
+  justify-content: space-between;
+}
+
+.elementName {
+  font-size: 20px;
+  line-height: 20px;
+
+  padding: 15px 5px;
+}
+
+.elementButton {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10%;
+  margin: 5px;
+}
+
+.buttons {
 }

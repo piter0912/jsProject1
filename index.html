@@ -22,20 +22,25 @@
                     <input 
                         type="text" 
                         id="income_new_name"
+                        placeholder="Nazwa przychodu"
                     />
                     <input 
-                        type="text" 
+                        type="number" 
                         id="income_new_amount"
+                        placeholder="Kwota"
                     />
                     <button
                         id="income_new_add"
+                        onclick="addNewIncome()"
                     >
                         Dodaj
                     </button>
                 </div>
             </div>
             <div id="income_body">
+                <ul id="income_list">
 
+                </ul>
             </div>
             <div id="income_footer">
                 <span id="income_footer_title">Suma przychodów</span>
@@ -52,20 +57,25 @@
                     <input 
                         type="text" 
                         id="expense_new_name"
+                        placeholder="Nazwa wydatku"
                     />
                     <input 
-                        type="text" 
+                        type="number" 
                         id="expense_new_amount"
+                        placeholder="Kwota"
                     />
                     <button
                         id="expense_new_add"
+                        onclick="addNewExpense()"
                     >
                         Dodaj
                     </button>
                 </div>
             </div>
             <div id="expense_body">
+                <ul id="expense_list">
 
+                </ul>
             </div>
             <div id="expense_footer">
                 <span id="expense_footer_title">Suma wydatków</span>
@@ -75,5 +85,6 @@
             </div>
         </div>
     </div>
+    <script src="./js/functions.js"></script>
 </body>
 </html>
