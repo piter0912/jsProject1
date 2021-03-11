@@ -11,17 +11,18 @@
 <body>
     <div id="header">
         <img id="logo" src="https://d3fldh011ywsk8.cloudfront.net/wp-content/uploads/2017/12/Scholarship.jpg" />
-        <h1 id="header_title"></h1>
+        <h1 id="header_title">Nie dodano jeszcze żadnych przychodów ani wydatków.</h1>
     </div>
 
     <div id="content">
-        <div id="income">
-            <div id="income_head">
-                <h2 id="income_head_title">PRZYCHODY</h2>
-                <div id="income_head_new">
+        <div class="main">
+            <div class="elementHead">
+                <h2 class="elementHeadTitle">PRZYCHODY</h2>
+                <div class="elementHeadNew">
                     <input 
                         type="text" 
                         id="income_new_name"
+                        class="newName"
                         placeholder="Nazwa przychodu"
                     />
                     <input 
@@ -37,26 +38,27 @@
                     </button>
                 </div>
             </div>
-            <div id="income_body">
+            <div class="elementBody">
                 <ul id="income_list">
 
                 </ul>
             </div>
-            <div id="income_footer">
-                <span id="income_footer_title">Suma przychodów</span>
+            <div class="elementFooter">
+                <span class="elementFooter">Suma przychodów: </span>
                 <strong>
-                    <span id="income_footer_amount"></span>
+                    <span id="income_footer_amount" class="elementFooter"></span>
                 </strong>
             </div>
         </div>
 
-        <div id="expense">
-            <div id="expense_head">
-                <h2 id="expense_head_title">WYDATKI</h2>
-                <div id="expense_head_new">
+        <div class="main">
+            <div class="elementHead">
+                <h2 class="elementHeadTitle">WYDATKI</h2>
+                <div class="elementHeadNew">
                     <input 
                         type="text" 
                         id="expense_new_name"
+                        class="newName"
                         placeholder="Nazwa wydatku"
                     />
                     <input 
@@ -72,15 +74,15 @@
                     </button>
                 </div>
             </div>
-            <div id="expense_body">
+            <div class="elementBody">
                 <ul id="expense_list">
 
                 </ul>
             </div>
-            <div id="expense_footer">
-                <span id="expense_footer_title">Suma wydatków</span>
+            <div class="elementFooter">
+                <span class="elementFooter">Suma wydatków: </span>
                 <strong>
-                    <span id="expense_footer_amount"></span>
+                    <span id="expense_footer_amount" class="elementFooter"></span>
                 </strong>
             </div>
         </div>

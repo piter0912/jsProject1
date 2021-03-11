@@ -1,140 +1,67 @@
-function updateHeadContent() {
-    console.log("Aktualizacja nagłówka");
+function addListener(element, type) {
+    document.querySelector('#'+element).addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          if(type==="income"){
+              addNewIncome();
+          } else {
+              addNewExpense();
+          }
+        }
+    });
 }
 
-function updateIncomeTotal() {
-    console.log("Aktualizacja sumy przychodów");
-}
+addListener('income_new_name','income');
+addListener('income_new_amount','income');
+addListener('expense_new_name','expense');
+addListener('expense_new_amount','expense');
 
-function updateExpenseTotal() {
-    console.log("Aktualizacja sumy wydatków");
-}
 
-function addNewIncome() {
-    const incomeName = document.querySelector("#income_new_name").value;
-    const incomeAmount = parseInt(document.querySelector("#income_new_amount").value);
-    console.log(incomeAmount);
-    if(incomeName === '' & ( isNaN(incomeAmount) | incomeAmount === 0)) {
-        alert("Należy ppodać nazwę oraz kwotę przychodu");
-    } else if(incomeName === '') {
-        alert("Nie podano nazwy przychodu");
-    } else if(isNaN(incomeAmount) | incomeAmount=== 0) {
-        alert("Nie podano kwoty przychodu");
-    } else {        
-        const newElement = addElement(incomeName, incomeAmount, editElement, deleteElement);
-        const incomeList = document.querySelector("#income_list");
-        incomeList.appendChild(newElement);
-        blankFields("income");
-    }
-    console.log("Dodanie przychodu");
-}
-
-function deleteElement(event) {
-    const id = getId(event.target.id, 'delete');
-    const div = document.querySelector('#div'+id);
-    div.remove();
-}
-
-function editElement(event) {
-    const id = getId(event.target.id, 'edit');
-    const name = document.querySelector('#name'+id);
-    const amount = document.querySelector('#amount'+id);
-    const edit = document.querySelector('#edit'+id);
-    if(event.target.innerText === "Edytuj") {        
-        name.contentEditable = true;
-        name.style.border = "3px solid blue";
-        amount.contentEditable = true;
-        amount.style.border = "3px solid blue";
-        edit.innerText = "Zapisz";
-    } else if(!checkName(name.innerText) && !checkAmount(amount.innerText)) {
-        alert("Należy podać co najmniej 3 znakową nazwę oraz poprawną kwotę.");
-        name.style.border = "3px solid red";
-        amount.style.border = "3px solid red";
-        name.focus();
-    } else if(!checkName(name.innerText)) {
-        alert("Należy podać co najmniej 3 znakową nazwę.")
-        name.style.border = "3px solid red";
-        amount.style.border = "3px solid lightgreen";
-        name.focus();
-    } else if(!checkAmount(amount.innerText)) {
-        alert("Należy podać poprawną kwotę.")
-        name.style.border = "3px solid lightgreen";
-        amount.style.border = "3px solid red";
-        amount.focus();
-    } else {
-        name.contentEditable = false;
-        name.style.border = "none";
-        amount.contentEditable = false;
-        amount.style.border = "none"; 
-        edit.innerText = "Edytuj";       
-    }    
-}
-
-function addNewExpense(name, amount) {
-    const expenseName = document.querySelector("#expense_new_name").value;
-    const expenseAmount = parseInt(document.querySelector("#expense_new_amount").value);
-    if(expenseName === '' & ( isNaN(expenseAmount) | expenseAmount === 0)) {
-        alert("Należy ppodać nazwę oraz kwotę wydatku");
-    } else if(expenseName === '') {
-        alert("Nie podano nazwy wydatku");
-    } else if(isNaN(expenseAmount) | expenseAmount === 0) {
-        alert("Nie podano kwoty wydatku");
-    } else {        
-        const newElement = addElement(expenseName, expenseAmount, editElement, deleteElement);
-        const expenseList = document.querySelector("#expense_list");
-        expenseList.appendChild(newElement);
-        blankFields("expense");
-    }
-    console.log("Dodanie przychodu");
-}
-
-function addElement(name, amount, editFunction, deleteFunction) {
+function addElement(name, amount, editFunction, deleteFunction, amountClass) {
     const id = parseInt(Math.floor(Math.random()*Math.pow(10,6)));
 
     const newDiv = document.createElement('div');
     newDiv.id = 'div'+id;
     newDiv.classList.add('listElement');
 
-    const newLi = document.createElement("li");
+    const newLi = document.createElement('li');
     newLi.classList.add('elementName');
 
     const buttonsDiv = document.createElement('div');
     buttonsDiv.classList.add('buttons');
  
-    const incomeN = document.createElement("span");
-    incomeN.innerText = name;
-    incomeN.classList.add(id);
-    incomeN.id = "name"+id;
-    incomeN.readOnly = true;
+    const elementName = document.createElement('span');
+    elementName.innerText = name;
+    elementName.classList.add(id, 'item');
+    elementName.id = 'name'+id;
+    elementName.readOnly = true;
     
-    const span1 = document.createElement("span");
-    span1.innerText = " - ";
+    const span1 = document.createElement('span');
+    span1.innerText = ' - ';
 
-    const incomeA = document.createElement("span");
-    incomeA.innerText = amount;
-    incomeA.classList.add(id);
-    incomeA.id = "amount"+id;
-    incomeA.readOnly = true;
+    const elementAmount = document.createElement('span');
+    elementAmount.innerText = amount;
+    elementAmount.classList.add(id, 'item', amountClass);
+    elementAmount.id = 'amount'+id;
+    elementAmount.readOnly = true;
 
-    const span2 = document.createElement("span");
-    span2.innerText = "zł";
+    const span2 = document.createElement('span');
+    span2.innerText = 'zł';
 
-    newLi.appendChild(incomeN);
+    newLi.appendChild(elementName);
     newLi.appendChild(span1);
-    newLi.appendChild(incomeA);
+    newLi.appendChild(elementAmount);
     newLi.appendChild(span2);
 
-    // newLi.innerText = `${name} - ${amount}zł`;
     const editBtn = document.createElement('button');
     editBtn.addEventListener('click',editFunction);
     editBtn.classList.add('elementButton');   
     editBtn.id = 'edit'+id; 
-    editBtn.innerText = "Edytuj";    
+    editBtn.innerText = 'Edytuj';    
     const delBtn = document.createElement('button');
     delBtn.addEventListener('click',deleteFunction);
     delBtn.classList.add('elementButton');
     delBtn.id = 'delete'+id;
-    delBtn.innerText = "Usuń";        
+    delBtn.innerText = 'Usuń';        
     buttonsDiv.appendChild(editBtn);
     buttonsDiv.appendChild(delBtn);
     newDiv.appendChild(newLi);
@@ -142,11 +69,113 @@ function addElement(name, amount, editFunction, deleteFunction) {
     return newDiv;
 }
 
+function addNewExpense() {
+    const expenseName = document.querySelector('#expense_new_name');
+    const expenseAmount = document.querySelector('#expense_new_amount');
+    const expenseText = expenseName.value;
+    const expenseValue = parseFloat(expenseAmount.value);
+    if(checkFields(expenseName, expenseAmount, expenseText, expenseValue, 'wydatku', '1px solid black')) {        
+        const newElement = addElement(expenseText, expenseValue, editElement, deleteElement, 'expenseValue');
+        const expenseList = document.querySelector('#expense_list');
+        expenseList.appendChild(newElement);
+        blankFields('expense');
+        updateHeading();
+    }
+}
+
+function addNewIncome() {
+    const incomeName = document.querySelector('#income_new_name');
+    const incomeAmount = document.querySelector('#income_new_amount');
+    const incomeText = incomeName.value;
+    const inocmeValue = parseFloat(incomeAmount.value)
+    if(checkFields(incomeName, incomeAmount, incomeText, inocmeValue, 'przychodu', '1px solid black')) {        
+        const newElement = addElement(incomeText, inocmeValue, editElement, deleteElement, 'incomeValue');
+        const incomeList = document.querySelector('#income_list');
+        incomeList.appendChild(newElement);
+        blankFields('income');
+        updateHeading();
+    }
+}
+
 function blankFields(type) {
-    const nameField = document.querySelector("#"+type+"_new_name");
-    const amountField = document.querySelector("#"+type+"_new_amount");
+    const nameField = document.querySelector('#'+type+'_new_name');
+    const amountField = document.querySelector('#'+type+'_new_amount');
     nameField.value = '';
     amountField.value = '';
+}
+
+function calculate(type) {
+    const list = document.querySelectorAll('.'+type+'Value');
+    let total = 0;
+    for(const element of list) {
+        total += parseFloat(element.innerText);
+    }
+    return total;
+}
+
+
+function checkAmount(amount) {
+    return !isNaN(Number(amount)) && Number(amount) !==0;
+}
+
+function checkFields(nameField, amountField, nameValue, amountValue, type, originalStyle) {
+    const nameOk = checkName(nameValue);
+    const amountOk = checkAmount(amountValue);
+    if(!nameOk && !amountOk) {
+        alert(`Należy podać nazwę oraz kwotę ${type}`);
+        setBorderAndAddFocus(amountField,'3px solid red',false);
+        setBorderAndAddFocus(nameField,'3px solid red',true);
+    } else if(!nameOk) {
+        alert(`Nie podano nazwy ${type}`);
+        setBorderAndAddFocus(amountField,'3px solid lightgreen',false);
+        setBorderAndAddFocus(nameField,'3px solid red',true);
+    } else if(!amountOk) {
+        alert(`Nie podano kwoty ${type}`);
+        setBorderAndAddFocus(nameField,'3px solid lightgreen',false);
+        setBorderAndAddFocus(amountField,'3px solid red',true);
+    } else {
+        setBorderAndAddFocus(nameField,originalStyle,true);
+        setBorderAndAddFocus(amountField,originalStyle,false);
+        return true;
+    }
+    return false;
+}
+
+function checkName(name) {
+    return name.length>=3;
+}
+
+function deleteElement(event) {
+    const id = getId(event.target.id, 'delete');
+    const div = document.querySelector('#div'+id);
+    div.remove();
+    updateHeading();
+}
+
+function editElement(event) {
+    const id = getId(event.target.id, 'edit');
+    const name = document.querySelector('#name'+id);
+    const amount = document.querySelector('#amount'+id);
+    const edit = document.querySelector('#edit'+id);
+    if(event.target.innerText === 'Edytuj') {        
+        name.contentEditable = true;
+        name.style.border = '3px solid blue';
+        amount.contentEditable = true;
+        amount.style.border = '3px solid blue';
+        edit.innerText = 'Zapisz';
+    } else if(checkFields(name, amount, name.innerText, amount.innerText, 'nie wiem', 'none')) {
+        name.contentEditable = false;
+        name.style.border = 'none';
+        amount.contentEditable = false;
+        amount.style.border = 'none'; 
+        edit.innerText = 'Edytuj';
+        updateHeading();       
+    }    
+}
+
+function setBorderAndAddFocus(element, border, ifFocus) {
+    element.style.border = border;
+    ifFocus && element.focus();
 }
 
 function getId(oldId, name) {
@@ -155,10 +184,25 @@ function getId(oldId, name) {
     return(newId);
 }
 
-function checkName(name) {
-    return name.length>=3
+function updateHeading() {
+    const income = calculate('income');
+    updateFooter('income', income);
+    const expense = calculate('expense');
+    updateFooter('expense', expense);
+    const total = income - expense;
+    let title = '';
+    if(total > 0) {
+        title = `Możesz jeszcze wydać ${total} złotych.`;
+    } else if(total === 0) {
+        title = 'Bilans wynosi zero';
+    } else {
+        title = `Bilans jest ujemny. Jesteś na minusie ${Math.abs(total)} złotych.`;
+    }
+    const heading = document.querySelector('#header_title');
+    heading.innerText = title; 
 }
 
-function checkAmount(amount) {
-    return !isNaN(Number(amount))
+function updateFooter(type, total) {
+    const footer = document.querySelector('#'+type+'_footer_amount');
+    footer.innerText = total>0 ? total+'zł' : '';
 }

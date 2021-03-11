@@ -1,3 +1,8 @@
+#header_title {
+  padding: 20px;
+  border: solid 3px black;
+}
+
 input[type="number"] {
   width: 80px;
 }
@@ -5,10 +10,12 @@ input[type="number"] {
 input {
   margin: 0 3px;
   height: 30px;
+  border: 1px solid black;
 }
 
 button {
   padding: 0 15px;
+  border-radius: 15%;
 }
 
 #content {
@@ -19,49 +26,42 @@ button {
   flex-wrap: wrap;
 }
 
-#expense,
-#income {
+.main {
   display: flex;
   flex-direction: column;
-  min-height: 800px;
+  min-height: 60vh;
   width: 40vw;
-}
-
-#income,
-#expense {
   border: 3px solid black;
 }
 
-#income_head,
-#expense_head {
+.item {
+  padding: 5px 15px;
+}
+
+.elementHead {
   border-bottom: 3px solid black;
   padding: 25px;
 }
 
-#expense_body,
-#income_body {
-  min-height: 50vh;
+.elementBody {
+  min-height: 60vh;
   flex-grow: 1;
 }
 
-#income_footer,
-#expense_footer {
+.elementFooter {
   padding: 10px;
 }
 
-#income_head_new,
-#expense_head_new {
+.elementHeadNew {
   display: flex;
 }
 
-#income_new_name,
-#expense_new_name {
+.newName {
   flex-grow: 1;
 }
 
-#income_footer_title,
-#expense_footer_title {
-  font-size: large;
+.elementFooter {
+  font-size: x-large;
 }
 
 .listElement {
@@ -72,7 +72,6 @@ button {
 .elementName {
   font-size: 20px;
   line-height: 20px;
-
   padding: 15px 5px;
 }
 
