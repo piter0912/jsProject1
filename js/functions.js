@@ -115,22 +115,22 @@ function calculate(type) {
 
 
 function checkAmount(amount) {
-    return !isNaN(Number(amount)) && Number(amount) !==0;
+    return !isNaN(Number(amount)) && Number(amount) > 0;
 }
 
 function checkFields(nameField, amountField, nameValue, amountValue, type, originalStyle) {
     const nameOk = checkName(nameValue);
     const amountOk = checkAmount(amountValue);
     if(!nameOk && !amountOk) {
-        alert(`Należy podać nazwę oraz kwotę ${type}`);
+        alert(`Należy podać poprawną nazwę (min. 3 znaki) oraz kwotę (większą od zera) ${type}`);
         setBorderAndAddFocus(amountField,'3px solid red',false);
         setBorderAndAddFocus(nameField,'3px solid red',true);
     } else if(!nameOk) {
-        alert(`Nie podano nazwy ${type}`);
+        alert(`Nazwa ${type} musi mieć min. 3 znaki.`);
         setBorderAndAddFocus(amountField,'3px solid lightgreen',false);
         setBorderAndAddFocus(nameField,'3px solid red',true);
     } else if(!amountOk) {
-        alert(`Nie podano kwoty ${type}`);
+        alert(`Kwota ${type} musi być większa od zera`);
         setBorderAndAddFocus(nameField,'3px solid lightgreen',false);
         setBorderAndAddFocus(amountField,'3px solid red',true);
     } else {
@@ -163,7 +163,7 @@ function editElement(event) {
         amount.contentEditable = true;
         amount.style.border = '3px solid blue';
         edit.innerText = 'Zapisz';
-    } else if(checkFields(name, amount, name.innerText, amount.innerText, 'nie wiem', 'none')) {
+    } else if(checkFields(name, amount, name.innerText, amount.innerText, '', 'none')) {
         name.contentEditable = false;
         name.style.border = 'none';
         amount.contentEditable = false;
